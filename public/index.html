@@ -21,14 +21,27 @@
         <section id="cards" class="container-fluid" ng-controller="CardsController as cardsController">
           <div class="row">
 
-            <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="card in cardsController.questionsList" >
-           <!--    <div class="card">
+            <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="card in cardsController.questionList" >
+              <div class="card">
                 <h4 class="card-title">{{card.question}}</h4>
                 <h6>Cards Against Assembly</h6>
-              </div> -->
+              </div>
               <wdi-card question="{{card.question}}"></wdi-card>
             </div>
           </div>
+          <form class="add-card" ng-submit='cardsController.addCard(card)'>
+          <div>
+            <label for="newCriminal-name">Question:</label>
+            <input type="text" id="newCard-question" ng-model="card.question" value="{{ question.question}}">
+          </div>
+          <div>
+            <label for="newCard-answer">Answer:</label>
+            <input type="text" id="newCard-answer" ng-model="card.answer">
+          </div>
+          <div>
+            <input type="submit" value="Update">
+          </div>
+        </form> 
         </section>
 
       <footer>

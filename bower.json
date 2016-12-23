@@ -1,0 +1,20 @@
+{
+  "name": "angular-directives-lab",
+  "description": "<!--11:05 5 minutes -->",
+  "main": "index.js",
+  "authors": [
+    "gliechty <guy.liechty@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/gliechty/angular-directives-lab",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.0"
+  }
+}
