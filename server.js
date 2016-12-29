@@ -11,7 +11,7 @@ var db = require('./models');
 // routes
 
 // get all cards
-app.get('/', function(req, res){
+app.get('/cards', function(req, res){
 	db.Card.find(function(err, cards){
 		if (err) {return console.log("index err: "+err);}
 			res.json(cards);
@@ -19,7 +19,7 @@ app.get('/', function(req, res){
 });
 
 // get one card by ID
-app.get('/:id', function(req, res){
+app.get('/cards/:id', function(req, res){
 	db.Card.findById(req.params.id, function(err, card){
 		if (err){return console.log("show err: "+err);}
 			res.json(card);
@@ -28,7 +28,7 @@ app.get('/:id', function(req, res){
 
 
 //create new card
-app.post('/', function (req, res){
+app.post('/cards', function (req, res){
 	var newCard = new db.Card(req.body);
 	newCard.save(function(err, card){
 		if (err) {return console.log("create err: "+err); }
@@ -48,5 +48,5 @@ app.get('/', function (req, res){
 app.use(express.static(__dirname + "/public"));
 
 app.listen(port, function() {
-	console.log('server starterd on', port);
+	console.log('server started on', port);
 });
