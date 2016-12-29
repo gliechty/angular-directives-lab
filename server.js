@@ -29,17 +29,30 @@ app.get('/cards/:id', function(req, res){
 
 //create new card
 app.post('/cards', function (req, res){
+	console.log(req.body);
 	var newCard = new db.Card(req.body);
 	newCard.save(function(err, card){
 		if (err) {return console.log("create err: "+err); }
-		console.log("created", card.question);
-		res.json(card);
+		console.log("created", card);
+		res.json({card:card});
 	});
+});
+
+// delete card
+app.delete('/cards/:id', function (req, res){
+	var id = req.params.id;
+	console.log(id);
+	db.Card.remove({_id : id}, function(error){
+		if(error) res.json({message: 'could not delete b/c' + error});
+		res.json({message: "Successfully deleted"});
+	}).select('-__v');
 });
 
 // static files
 
-app.use(bodyParser.urlencoded({extended:false}));
+// app.use(bodyParser.urlencoded({extended:false}));
+
+app.use(bodyParser.json());
 
 app.get('/', function (req, res){
 	res.sendFile(__dirname+"/public/index.html");

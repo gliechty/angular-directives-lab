@@ -24,24 +24,21 @@ function CardsController($http){
   self.newCard = {};
   self.getQuestions = getQuestions;
   self.getQuestion = getQuestion;
+  self.deleteCard = deleteCard;
   
-  // GET
+  // GET -works now
   function getQuestions(){
-    console.log("getting called");
   $http
-    .get('localhost:3000/cards')
+    .get('http://localhost:3000/cards')
     .then(function(response){
-      self.all = response.data.questions;
-      console.log(response.data);
-      console.log(self.all);
+      self.all = response.data;
     });
   }
-  // getQuestions();
 
   // SHOW
   function getQuestion(){
   $http
-    .get('https://localhost:3000/cards/id:')
+    .get('http://localhost:3000/cards/id:')
     .then(function(response){
       vm.singleQuestion = response.data;
     });
@@ -49,17 +46,34 @@ function CardsController($http){
   getQuestions();
 
 
-  // ADD
+  // ADD --
   function addCard(){
     $http
-      .post('https://localhost:3000/cards', this.newCard)
+      .post('http://localhost:3000/cards', self.newCard)
       .then(function (request){
+        // trying below lines commented out
+
+        // self.all.push(self.newCard);
+        // console.log(self.newCard);
+        console.log(request);
         getQuestions();
       });
       self.newCard ={};
   }
 
-  // DELETE
+ function deleteCard(card){
+  console.log('getting called');
+  console.log(card._id);
+   $http
+     .delete('http://localhost:3000/cards/' + card._id)
+     .then(function (res){
+       console.log(res);
+       var index = self.all.indexOf(card);
+       console.log(index);
+       self.all.splice(index, 1);
+       getQuestions();
+     });
+ }
 
 }
 
