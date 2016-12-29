@@ -7,6 +7,18 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
 
+app.use(bodyParser.json());
+
+app.get('/', function (req, res){
+	res.sendFile(__dirname+"/public/index.html");
+});
+
+app.use(express.static(__dirname + "/public"));
+
+app.listen(port, function() {
+	console.log('server started on', port);
+});
+
 var db = require('./models');
 // routes
 
@@ -29,6 +41,7 @@ app.get('/cards/:id', function(req, res){
 
 //create new card
 app.post('/cards', function (req, res){
+	// console.log(req);
 	console.log(req.body);
 	var newCard = new db.Card(req.body);
 	newCard.save(function(err, card){
@@ -41,25 +54,10 @@ app.post('/cards', function (req, res){
 // delete card
 app.delete('/cards/:id', function (req, res){
 	var id = req.params.id;
-	console.log(id);
 	db.Card.remove({_id : id}, function(error){
 		if(error) res.json({message: 'could not delete b/c' + error});
 		res.json({message: "Successfully deleted"});
 	}).select('-__v');
 });
 
-// static files
 
-// app.use(bodyParser.urlencoded({extended:false}));
-
-app.use(bodyParser.json());
-
-app.get('/', function (req, res){
-	res.sendFile(__dirname+"/public/index.html");
-});
-
-app.use(express.static(__dirname + "/public"));
-
-app.listen(port, function() {
-	console.log('server started on', port);
-});

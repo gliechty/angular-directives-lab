@@ -39,11 +39,11 @@
           <form class="add-card" ng-submit='cardsController.addCard()'>
             <div>
               <label for="newCard-name">Question:</label>
-              <input type="text" id="newCard-question" ng-model="cardsController.newCard.question" value="{{card.question}}">
+              <input type="text" id="newCard-question" ng-model="cardsController.newCard.question" value={{card.question}}>
             </div>
             <div>
               <label for="newCard-answer">Answer:</label>
-              <input type="text" id="newCard-answer" ng-model="cardsController.newCard.answer" value="{{card.answer}}">
+              <input type="text" id="newCard-answer" ng-model="cardsController.newCard.answer" value={{card.answer}}>
             </div>
             <div>
               <input type="submit" value="Add Card">
