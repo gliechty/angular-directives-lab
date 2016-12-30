@@ -10,7 +10,7 @@ function CardsController($http){
   self.getQuestions = getQuestions;
   // self.getQuestion = getQuestion;
   self.deleteCard = deleteCard;
-  // self.updateCard = updateCard;
+  self.updateCard = updateCard;
   
   // GET - works 
   function getQuestions(){
@@ -54,15 +54,16 @@ function CardsController($http){
  }
 
  // UPDATE --
-//  function updateCard(card){
-//     console.log('update hit');
-//     $http
-//       .patch('http://localhost:3000/cards/' + card._id, card)
-//       .then(function (request){
-//         console.log(request);
-//         getQuestions();
-//       });
-//  }
+ function updateCard(card){
+    console.log('update hit');
+    $http
+      .patch('http://localhost:3000/cards/'+ card._id, card)
+      .then(function (request){
+        console.log('funtion hit');
+        console.log(request);
+        getQuestions();
+      });
+ }
 
 }
 

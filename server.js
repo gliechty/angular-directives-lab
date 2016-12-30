@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
+// var jsonParser = bodyParser.json();
 var mongoose = require('mongoose');
 
 app.use(bodyParser.json());
@@ -18,6 +18,12 @@ app.use(express.static(__dirname + "/public"));
 app.listen(port, function() {
 	console.log('server started on', port);
 });
+
+app.use(function(req, res, next) {
+res.header("Access-Control-Allow-Origin", "*");
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+next();
+})
 
 var db = require('./models');
 // routes
@@ -64,9 +70,11 @@ app.delete('/cards/:id', function (req, res){
 app.patch('/cards/:id', function (req, res){
 	  var id = req.params.id;
 	  db.Card.findById({_id: id}, function(error, card) {
+	  	console.log(req.body._id);
 	    if(error) res.json({message: 'Could not find card b/c:' + error});
-	    if(req.body.question) card.question = req.data.question;
-	    if(req.body.answer) card.answer = req.data.answer;
+	    console.log (req.body.card);
+	    if(req.body.question) card.question = req.body.question;
+	    if(req.body.answer) card.answer = req.body.answer;
 
 	    card.save(function(error) {
       if(error) res.json({messsage: 'Could not update card b/c:' + error});
