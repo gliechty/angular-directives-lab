@@ -10,8 +10,9 @@ function CardsController($http){
   self.getQuestions = getQuestions;
   // self.getQuestion = getQuestion;
   self.deleteCard = deleteCard;
+  // self.updateCard = updateCard;
   
-  // GET -works now
+  // GET - works 
   function getQuestions(){
   $http
     .get('http://localhost:3000/cards')
@@ -31,17 +32,11 @@ function CardsController($http){
   getQuestions();
 
 
-  // ADD --
+  // ADD -- works
   function addCard(){
     $http
       .post('http://localhost:3000/cards', self.newCard)
       .then(function (request){
-        // trying below lines commented out
-        console.log(self.newCard);
-        // self.all+=(self.newCard);
-        console.log(self.all);
-        console.log(request);
-
         getQuestions();
       });
       self.newCard ={};
@@ -58,5 +53,30 @@ function CardsController($http){
      });
  }
 
+ // UPDATE --
+//  function updateCard(card){
+//     console.log('update hit');
+//     $http
+//       .patch('http://localhost:3000/cards/' + card._id, card)
+//       .then(function (request){
+//         console.log(request);
+//         getQuestions();
+//       });
+//  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

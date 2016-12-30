@@ -20,7 +20,8 @@
         </header>
         <section id="cards" class="container-fluid" ng-controller="CardsController as cardsController">
           <div class="row">
-
+            
+            <!-- NgRepeat -->
             <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="card in cardsController.all" >
 
               <div class="card">
@@ -29,10 +30,27 @@
               </div>
               <button class='delete' ng-click="cardsController.deleteCard(card)">X</button>
 
-              <!-- <wdi-card question="{{card.question}}"></wdi-card> -->
+              <!-- Update form -->
+              <br/>
+              <form class="update-card" ng-submit='cardsController.updateCard(card)'>
+              <div>
+                <label for="newCard-question">Question:</label>
+                <input type="text" id="newCard-name" ng-model="cardsController.question" value="{{ question.question }}">
+              </div>
+              <div>
+                <label for="newCard-answer">Answer:</label>
+                <input type="text" id="newCard-Answer" ng-model="cardsController.answer" value="{{ answer.answer }}">
+              </div>
+              <div>
+              <br/>
+                <input type="submit" value="Update">
+              </div>
+              <br/>
+            </form> 
 
             </div>
           </div>
+          <br/>
 
           <!-- add card -->
 

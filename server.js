@@ -60,4 +60,29 @@ app.delete('/cards/:id', function (req, res){
 	}).select('-__v');
 });
 
+// update card
+app.patch('/cards/:id', function (req, res){
+	  var id = req.params.id;
+	  db.Card.findById({_id: id}, function(error, card) {
+	    if(error) res.json({message: 'Could not find card b/c:' + error});
+	    if(req.body.question) card.question = req.data.question;
+	    if(req.body.answer) card.answer = req.data.answer;
+
+	    card.save(function(error) {
+      if(error) res.json({messsage: 'Could not update card b/c:' + error});
+
+      res.json({message: 'Card successfully updated', card: card});
+    });
+	console.log('backend' + card);
+  }).select('-__v');
+});
+
+
+
+
+
+
+
+
+
 
